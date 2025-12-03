@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="StudioVINCE - Wij vieren de schoonheid van karakter. Minimalistische portretfotografie.">
+    <meta name="description" content="StudioVINCE - Portretfotografie in Zuid-Nederland & Vlaanderen.">
     <title>StudioVINCE | De Onbewaakte Blik</title>
     
     <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- ALPINE JS (Voor de Calculator) -->
+    <!-- ALPINE JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- FONTS: Inter & Source Sans Pro (Strak & Modern) -->
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        bg: '#f4f4f0',       /* Off-White / Analoog Papier */
-                        text: '#1a1a1a',     /* Bijna Zwart */
-                        muted: '#5e5b52',    /* Aarde/Houtskool */
-                        lines: '#e5e5e0',    /* Zachte lijnen */
+                        bg: '#f4f4f0',       /* Off-White Papier */
+                        text: '#0a0a0a',     /* Diep Zwart */
+                        muted: '#4a4a4a',    /* Warme Grijstint */
+                        lines: '#e5e5e0',    /* Lijnen */
+                        disable: '#cccccc'   /* Disabled state */
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         body: ['Source Sans 3', 'sans-serif'],
-                    },
-                    spacing: {
-                        '128': '32rem',
                     }
                 }
             }
@@ -39,173 +37,248 @@
     </script>
     
     <style>
-        /* Minimalist Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f4f4f0; }
-        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-        
-        /* Typography Scale adjustments */
-        body { font-size: 1.125rem; line-height: 1.7; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-bg text-text font-body antialiased selection:bg-text selection:text-white">
 
     <!-- NAVIGATIE -->
-    <nav class="fixed top-0 w-full bg-bg/95 backdrop-blur-sm z-50 border-b border-lines">
-        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 h-24 flex justify-between items-center">
-            <!-- LOGO -->
-            <a href="#" class="font-sans text-xl tracking-tighter font-bold uppercase hover:opacity-70 transition">
+    <nav class="fixed top-0 w-full bg-bg/95 backdrop-blur-md z-50 border-b border-lines">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 h-20 flex justify-between items-center">
+            <a href="#" class="font-sans text-lg font-bold uppercase tracking-tight hover:opacity-70 transition">
                 Studio<span class="font-light">VINCE</span>
             </a>
 
-            <!-- DESKTOP MENU -->
-            <div class="hidden md:flex space-x-10 text-sm font-sans font-medium tracking-wide uppercase">
+            <div class="hidden md:flex space-x-10 text-xs font-sans font-semibold tracking-widest uppercase">
                 <a href="#portfolio" class="hover:text-muted transition">Portfolio</a>
-                <a href="#proces" class="hover:text-muted transition">De Metamorfose</a>
+                <a href="#proces" class="hover:text-muted transition">Werkwijze</a>
                 <a href="#tarieven" class="hover:text-muted transition">Tarieven</a>
                 <a href="#contact" class="hover:text-muted transition">Contact</a>
             </div>
             
-            <!-- MOBILE MENU BUTTON (Simpel) -->
-            <a href="#contact" class="md:hidden text-xs uppercase font-bold tracking-widest border border-text px-4 py-2">
+            <a href="#contact" class="md:hidden text-xs uppercase font-bold border border-text px-4 py-2">
                 Book
             </a>
         </div>
     </nav>
 
-    <!-- HERO SEGMENT (Geen sliders, focus op tekst & beeld) -->
+    <!-- HERO -->
     <header class="relative min-h-screen flex flex-col justify-center pt-24 pb-12 px-6 md:px-12 max-w-screen-2xl mx-auto">
-        
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
-            <!-- TEXT BLOCK -->
+            <!-- Tekst -->
             <div class="md:col-span-7 lg:col-span-6 z-10">
-                <h1 class="font-sans text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.1] mb-8">
-                    Studio<span class="font-light">VINCE</span> — <br>
-                    Wij vieren de <br>
-                    schoonheid van <br>
-                    karakter.
+                <p class="text-xs font-bold uppercase tracking-[0.2em] mb-6 text-muted">Zuid-Nederland & Vlaanderen</p>
+                <h1 class="font-sans text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.05] mb-8">
+                    Studio<span class="font-light">VINCE</span> <br>
+                    Viert de schoonheid <br>
+                    van karakter.
                 </h1>
                 
                 <div class="max-w-lg border-l-2 border-text pl-6 mb-12">
-                    <h2 class="text-lg md:text-xl text-muted font-light">
+                    <h2 class="text-lg md:text-xl text-muted font-light leading-relaxed">
                         Wij geloven dat we niet moeten poseren voor de camera. 
                         Wij geloven dat we het portret moeten láten ontstaan.
                     </h2>
                 </div>
 
-                <a href="#contact" class="inline-block bg-text text-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest hover:bg-muted transition duration-300">
-                    Laten we een kop koffie drinken
+                <a href="#contact" class="inline-block bg-text text-white px-10 py-5 font-sans text-xs font-bold uppercase tracking-widest hover:bg-muted transition duration-300">
+                    Laten we koffie drinken
                 </a>
             </div>
 
-            <!-- HERO IMAGE (High Contrast Portrait) -->
-            <div class="md:col-span-5 lg:col-span-6 relative h-[60vh] md:h-[80vh] w-full bg-gray-200 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1964&auto=format&fit=crop" 
-                     class="w-full h-full object-cover grayscale contrast-125 hover:scale-105 transition duration-[2s]" 
-                     alt="Cinematic Portrait StudioVINCE">
+            <!-- Hero Image -->
+            <div class="md:col-span-5 lg:col-span-6 relative h-[60vh] md:h-[85vh] w-full bg-gray-200 overflow-hidden">
+                <img src="images/portfolio-1.jpg" 
+                     onerror="this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1964'"
+                     class="w-full h-full object-cover grayscale contrast-125 hover:scale-105 transition duration-[3s]" 
+                     alt="Cinematic Portrait">
             </div>
         </div>
     </header>
 
-    <!-- PORTFOLIO PREVIEW -->
+        <!-- PORTFOLIO GRID (15 FOTO'S) -->
     <section id="portfolio" class="py-24 px-6 md:px-12 max-w-screen-2xl mx-auto border-t border-lines">
-        <div class="flex justify-between items-end mb-16">
-            <h3 class="font-sans text-sm font-bold uppercase tracking-widest">Geselecteerd Werk</h3>
-            <a href="#" class="text-sm border-b border-text pb-1 hover:text-muted transition hidden md:block">Bekijk Volledig Portfolio</a>
+        <div class="mb-16">
+            <h3 class="font-sans text-sm font-bold uppercase tracking-widest mb-2">Geselecteerd Werk</h3>
+            <p class="text-muted text-sm max-w-2xl">Een greep uit recente projecten. Rauw, eerlijk en minimalistisch.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
-            <!-- PORTFOLIO ITEM 1 (OORSPRONG STYLE) -->
-            <div class="aspect-[3/4] group relative overflow-hidden bg-gray-100">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=80" 
-                     class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Oorsprong">
-                <div class="absolute bottom-4 left-4 text-white text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">De Oorsprong</div>
+        <!-- MASONRY GRID: 3 Kolommen -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            
+            <!-- Kolom 1 -->
+            <div class="flex flex-col gap-4">
+                <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="aspect-[4/3] overflow-hidden group">
+                    <img src="images/portfolio-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <!-- Nieuw 1 -->
+                <div class="aspect-[1/1] overflow-hidden group">
+                    <img src="images/portfolio-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                 <!-- Nieuw 2 -->
+                <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
             </div>
 
-            <!-- PORTFOLIO ITEM 2 (RITME STYLE) -->
-            <div class="aspect-[3/4] group relative overflow-hidden bg-gray-100 md:mt-12">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" 
-                     class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Ritme">
-                <div class="absolute bottom-4 left-4 text-white text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Het Ritme</div>
+            <!-- Kolom 2 -->
+            <div class="flex flex-col gap-4">
+                <div class="aspect-[4/5] overflow-hidden group">
+                    <img src="images/portfolio-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="aspect-[4/5] overflow-hidden group">
+                    <img src="images/portfolio-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                 <!-- Nieuw 1 -->
+                 <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                 <!-- Nieuw 2 -->
+                <div class="aspect-[4/3] overflow-hidden group">
+                    <img src="images/portfolio-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
             </div>
 
-            <!-- PORTFOLIO ITEM 3 (FRAMEWORK STYLE) -->
-            <div class="aspect-[3/4] group relative overflow-hidden bg-gray-100">
-                <img src="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=900&q=80" 
-                     class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Framework">
-                <div class="absolute bottom-4 left-4 text-white text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Het Framework</div>
+            <!-- Kolom 3 -->
+            <div class="flex flex-col gap-4">
+                <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="aspect-[1/1] overflow-hidden group">
+                    <img src="images/portfolio-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden group">
+                    <img src="images/portfolio-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                 <!-- Nieuw 1 -->
+                 <div class="aspect-[4/5] overflow-hidden group">
+                    <img src="images/portfolio-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
+                 <!-- Nieuw 2 -->
+                <div class="aspect-[3/5] overflow-hidden group">
+                    <img src="images/portfolio-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800'" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- DE METAMORFOSE (ARCHETYPEN) -->
+    <!-- DE METAMORFOSE (Images ipv Iconen) -->
     <section id="proces" class="py-24 bg-white">
         <div class="px-6 md:px-12 max-w-screen-2xl mx-auto">
             
-            <!-- HEADER -->
-            <div class="max-w-4xl mb-20">
-                <h2 class="font-sans text-4xl md:text-5xl font-semibold mb-8">De Onbewaakte Blik Vangen – <br>Onze Metamorfose in Drie Stappen.</h2>
+            <div class="max-w-4xl mb-16">
+                <h2 class="font-sans text-4xl md:text-5xl font-semibold mb-8">De Onbewaakte Blik Vangen.</h2>
                 <div class="bg-bg p-8 border-l-4 border-text italic text-muted text-xl leading-relaxed">
-                    "Dit is de basis van ons werk: het vangen van het moment waarin jij vergeet dat de camera er is en iets echts naar boven komt. Dat is de onbewaakte blik."
+                    "Het moment waarin jij vergeet dat de camera er is en iets echts naar boven komt. Dat is de onbewaakte blik."
                 </div>
             </div>
 
-            <!-- 3 KOLOMMEN -->
-            <div class="grid md:grid-cols-3 gap-16 border-t border-lines pt-16">
+            <!-- 3 Columns Image Grid -->
+            <div class="grid md:grid-cols-3 gap-12 border-t border-lines pt-12">
                 
-                <!-- STAP 1: OORSPRONG -->
-                <div class="group">
-                    <!-- ICON: Abstract Circle (Source/Focus) -->
-                    <div class="w-16 h-16 mb-8 text-text border-2 border-text rounded-full flex items-center justify-center bg-transparent group-hover:bg-text group-hover:text-white transition duration-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" stroke-width="3"/></svg>
+                <!-- 1. Oorsprong -->
+                <div>
+                    <!-- Image Placeholder: Pas bestandsnaam aan in je map -->
+                    <div class="aspect-[3/4] w-full mb-6 bg-gray-100">
+                         <img src="images/concept-oorsprong.jpg" 
+                              onerror="this.src='https://images.unsplash.com/photo-1589571894960-20bbe2815d22?w=800'" 
+                              class="w-full h-full object-cover grayscale">
                     </div>
-                    
-                    <h3 class="font-sans text-2xl font-bold mb-2">01. De OORSPRONG</h3>
-                    <span class="block text-sm uppercase tracking-widest text-muted mb-6">Headshot • Eenvoud</span>
-                    
-                    <p class="text-muted mb-4">
-                        Hier bouwen we onze eigen ruimte en creëren we het licht: theatraal of messcherp. Dit zijn portretten van pure kracht, waar alleen jouw gezicht telt en de omgeving verdwijnt. 
+                    <h3 class="font-sans text-xl font-bold mb-1">De OORSPRONG</h3>
+                    <p class="text-sm uppercase tracking-widest text-muted mb-4">Headshot • Eenvoud</p>
+                    <p class="text-muted text-sm leading-relaxed">
+                        Wij creëren ons eigen licht: theatraal of messcherp. Portretten van pure kracht, waar alleen jouw gezicht telt en de omgeving verdwijnt. De basis van je karakter.
                     </p>
-                    <p class="text-text font-medium">Wij leggen de absolute basis van je karakter bloot.</p>
                 </div>
 
-                <!-- STAP 2: RITME -->
-                <div class="group">
-                    <!-- ICON: Abstract Flow (Movement) -->
-                    <div class="w-16 h-16 mb-8 text-text border-2 border-text flex items-center justify-center bg-transparent group-hover:bg-text group-hover:text-white transition duration-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <!-- 2. Ritme -->
+                <div>
+                    <div class="aspect-[3/4] w-full mb-6 bg-gray-100">
+                         <img src="images/concept-ritme.jpg" 
+                              onerror="this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800'" 
+                              class="w-full h-full object-cover grayscale">
                     </div>
-
-                    <h3 class="font-sans text-2xl font-bold mb-2">02. Het RITME</h3>
-                    <span class="block text-sm uppercase tracking-widest text-muted mb-6">Halftotaal • Beweging</span>
-                    
-                    <p class="text-muted mb-4">
-                        Dit is waar we in actie schieten. Misschien buiten met de ruis van de stad, of in beweging met een gevonden detail. Ik observeer jouw flow en klik precies op het punt waar jij simpelweg aan het zijn bent.
+                    <h3 class="font-sans text-xl font-bold mb-1">Het RITME</h3>
+                    <p class="text-sm uppercase tracking-widest text-muted mb-4">Halftotaal • Beweging</p>
+                    <p class="text-muted text-sm leading-relaxed">
+                        Misschien buiten met de ruis van de stad, of bewegend met een detail. Ik observeer jouw flow en klik precies waar jij 'bent'. Jouw karakter leeft.
                     </p>
-                    <p class="text-text font-medium">Dit bewijst dat jouw karakter beweegt en leeft.</p>
                 </div>
 
-                <!-- STAP 3: FRAMEWORK -->
-                <div class="group">
-                    <!-- ICON: Abstract Grid (Composition) -->
-                    <div class="w-16 h-16 mb-8 text-text border-2 border-text flex items-center justify-center bg-transparent group-hover:bg-text group-hover:text-white transition duration-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z"></path></svg>
+                <!-- 3. Framework -->
+                <div>
+                    <div class="aspect-[3/4] w-full mb-6 bg-gray-100">
+                         <img src="images/concept-framework.jpg" 
+                              onerror="this.src='https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=800'" 
+                              class="w-full h-full object-cover grayscale">
                     </div>
-
-                    <h3 class="font-sans text-2xl font-bold mb-2">03. Het FRAMEWORK</h3>
-                    <span class="block text-sm uppercase tracking-widest text-muted mb-6">Volledig • Context</span>
-                    
-                    <p class="text-muted mb-4">
-                        Wij plaatsen alles in perspectief. Ik frame jou als de stille held in een groter, perfect gecomponeerd verhaal. Hier gaat het om de architectuur van het beeld, om tijdloosheid.
+                    <h3 class="font-sans text-xl font-bold mb-1">Het FRAMEWORK</h3>
+                    <p class="text-sm uppercase tracking-widest text-muted mb-4">Volledig • Context</p>
+                    <p class="text-muted text-sm leading-relaxed">
+                        Alles in perspectief. Ik frame jou als de stille held in een perfect gecomponeerd verhaal. Architectuur, tijdloosheid en ruimte.
                     </p>
-                    <p class="text-text font-medium">Dit is waar je stond. Dit is wat je uitstraalde.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TARIEVEN (CALCULATOR MATRIX) -->
-    <section id="tarieven" class="py-24 bg-bg border-t border-lines"
+    <!-- NEW SECTION: WORKFLOW -->
+    <section class="py-24 bg-bg border-t border-lines">
+        <div class="px-6 md:px-12 max-w-screen-2xl mx-auto">
+            <h2 class="font-sans text-3xl font-bold mb-12 text-center">Hoe wij werken</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-4 left-0 w-full h-0.5 bg-lines z-0"></div>
+
+                <!-- Stap 1 -->
+                <div class="relative z-10 pt-4 md:pt-0">
+                    <div class="w-4 h-4 bg-text rounded-full md:absolute md:-top-1.5 md:left-0 mb-4 hidden md:block"></div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-muted">Stap 1</span>
+                    <h4 class="text-lg font-bold mt-2">De Connectie</h4>
+                    <p class="text-sm text-muted mt-2">Contact via WhatsApp of Mail. We plannen een call om te zien of de klik er is.</p>
+                </div>
+
+                <!-- Stap 2 -->
+                <div class="relative z-10">
+                    <div class="w-4 h-4 bg-lines rounded-full md:absolute md:-top-1.5 md:left-0 mb-4 hidden md:block"></div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-muted">Stap 2</span>
+                    <h4 class="text-lg font-bold mt-2">Het Concept</h4>
+                    <p class="text-sm text-muted mt-2">We bepalen de richting. Moodboard, locatiekeuze en kledingadvies.</p>
+                </div>
+
+                <!-- Stap 3 -->
+                <div class="relative z-10">
+                    <div class="w-4 h-4 bg-lines rounded-full md:absolute md:-top-1.5 md:left-0 mb-4 hidden md:block"></div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-muted">Stap 3</span>
+                    <h4 class="text-lg font-bold mt-2">De Productie</h4>
+                    <p class="text-sm text-muted mt-2">De shoot zelf. Geen gehaast, maar rust, focus en ruimte voor experiment.</p>
+                </div>
+
+                <!-- Stap 4 -->
+                <div class="relative z-10">
+                    <div class="w-4 h-4 bg-lines rounded-full md:absolute md:-top-1.5 md:left-0 mb-4 hidden md:block"></div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-muted">Stap 4</span>
+                    <h4 class="text-lg font-bold mt-2">Oplevering</h4>
+                    <p class="text-sm text-muted mt-2">Selectie van de sterkhouders. Professionele nabewerking. Digitale levering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARIEVEN (CALCULATOR V2) -->
+    <section id="tarieven" class="py-24 bg-white border-t border-lines"
              x-data="{ 
                 pkg: 'oorsprong',
                 extras: [],
@@ -216,129 +289,137 @@
                     framework: { val: 675, name: 'Het FRAMEWORK', range: '€550 – €800', desc: '90-120 min / 10 bewerkte beelden' }
                 },
                 addons: {
-                    extra: { val: 40, name: 'Extra foto', display: '€35-€50 per beeld' },
-                    visagie: { val: 125, name: 'Visagie & Haar', display: '€100-€150 (Partner)' },
-                    studio: { val: 50, name: 'Studiohuur', display: '€50 p/u (indien nodig)' }
+                    extra: { val: 40, name: 'Extra foto', text: '€40 p.st.' },
+                    studio: { val: 60, name: 'Studio Huur (per uur)', text: '€60' },
+                    visagie: { val: 0, name: 'Visagie & Haar', text: 'Op Aanvraag' } // Val 0 zodat rekensom niet breekt
                 },
                 
-                // Estimate Calculation
-                estimate() {
-                    let base = this.prices[this.pkg].val;
-                    let extraSum = 0;
-                    this.extras.forEach(e => extraSum += this.addons[e].val);
-                    return base + extraSum;
+                // Logic check: als pkg switcht naar oorsprong, verwijder studio uit extras
+                init() {
+                    this.$watch('pkg', value => {
+                        if (value === 'oorsprong') {
+                            this.extras = this.extras.filter(x => x !== 'studio');
+                        }
+                    });
+                },
+
+                total() {
+                    let sum = this.prices[this.pkg].val;
+                    this.extras.forEach(e => {
+                        sum += this.addons[e].val;
+                    });
+                    return sum;
                 }
              }">
              
         <div class="px-6 md:px-12 max-w-screen-xl mx-auto">
-            <!-- TITELS -->
             <div class="mb-16">
-                <h2 class="font-sans text-4xl font-bold mb-4">Transparant: Onze Archetypen</h2>
+                <h2 class="font-sans text-4xl font-bold mb-4">Transparant: Tarieven</h2>
                 <p class="text-muted max-w-2xl">
-                    Wat is het waard? Onze prijzen reflecteren onze gezamenlijke tijd, aandacht en energie, niet de kwantiteit van beelden.
+                    De investering in kwaliteit.
                 </p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-16">
-                <!-- SELECTIE KOLOM -->
-                <div class="space-y-6">
-                    <p class="text-sm uppercase tracking-widest font-bold border-b border-lines pb-2 mb-6">1. Kies je Archetype</p>
+                <!-- Selectie -->
+                <div class="space-y-4">
+                    <p class="text-xs uppercase tracking-widest font-bold mb-4 text-muted">1. Kies Archetype</p>
                     
-                    <!-- Radio Button: Oorsprong -->
                     <label class="block cursor-pointer group">
-                        <div class="p-6 border-2 transition duration-300 bg-white"
-                             :class="pkg === 'oorsprong' ? 'border-text shadow-lg' : 'border-transparent hover:border-gray-300'">
-                            <div class="flex items-center mb-2">
-                                <input type="radio" value="oorsprong" x-model="pkg" class="w-5 h-5 accent-text mr-4">
-                                <span class="font-bold text-xl">De OORSPRONG</span>
+                        <div class="p-6 border transition duration-300"
+                             :class="pkg === 'oorsprong' ? 'border-text bg-bg' : 'border-gray-200 hover:border-gray-400'">
+                            <div class="flex items-center mb-1">
+                                <input type="radio" value="oorsprong" x-model="pkg" class="w-4 h-4 accent-text mr-4">
+                                <span class="font-bold text-lg">De OORSPRONG</span>
                             </div>
-                            <div class="pl-9 flex justify-between text-muted text-sm">
-                                <span>Headshot / Intimiteit</span>
-                                <span class="font-bold text-text">€150 - €250</span>
-                            </div>
+                            <span class="text-sm text-muted pl-8 block">Headshot / €150-€250</span>
                         </div>
                     </label>
 
-                    <!-- Radio Button: Ritme -->
                     <label class="block cursor-pointer group">
-                        <div class="p-6 border-2 transition duration-300 bg-white"
-                             :class="pkg === 'ritme' ? 'border-text shadow-lg' : 'border-transparent hover:border-gray-300'">
-                            <div class="flex items-center mb-2">
-                                <input type="radio" value="ritme" x-model="pkg" class="w-5 h-5 accent-text mr-4">
-                                <span class="font-bold text-xl">Het RITME</span>
+                        <div class="p-6 border transition duration-300"
+                             :class="pkg === 'ritme' ? 'border-text bg-bg' : 'border-gray-200 hover:border-gray-400'">
+                            <div class="flex items-center mb-1">
+                                <input type="radio" value="ritme" x-model="pkg" class="w-4 h-4 accent-text mr-4">
+                                <span class="font-bold text-lg">Het RITME</span>
                             </div>
-                            <div class="pl-9 flex justify-between text-muted text-sm">
-                                <span>Halftotaal / Beweging</span>
-                                <span class="font-bold text-text">€300 - €500</span>
-                            </div>
+                            <span class="text-sm text-muted pl-8 block">Halftotaal / €300-€500</span>
                         </div>
                     </label>
 
-                    <!-- Radio Button: Framework -->
                     <label class="block cursor-pointer group">
-                        <div class="p-6 border-2 transition duration-300 bg-white"
-                             :class="pkg === 'framework' ? 'border-text shadow-lg' : 'border-transparent hover:border-gray-300'">
-                            <div class="flex items-center mb-2">
-                                <input type="radio" value="framework" x-model="pkg" class="w-5 h-5 accent-text mr-4">
-                                <span class="font-bold text-xl">Het FRAMEWORK</span>
+                        <div class="p-6 border transition duration-300"
+                             :class="pkg === 'framework' ? 'border-text bg-bg' : 'border-gray-200 hover:border-gray-400'">
+                            <div class="flex items-center mb-1">
+                                <input type="radio" value="framework" x-model="pkg" class="w-4 h-4 accent-text mr-4">
+                                <span class="font-bold text-lg">Het FRAMEWORK</span>
                             </div>
-                            <div class="pl-9 flex justify-between text-muted text-sm">
-                                <span>Volledig / Compositie</span>
-                                <span class="font-bold text-text">€550 - €800</span>
-                            </div>
+                            <span class="text-sm text-muted pl-8 block">Volledig / €550-€800</span>
                         </div>
                     </label>
 
-                    <!-- MODIFIERS -->
+                    <!-- Modifiers -->
                     <div class="pt-8">
-                        <p class="text-sm uppercase tracking-widest font-bold border-b border-lines pb-2 mb-6">2. Modifiers (Optioneel)</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <label class="flex items-center p-4 bg-white border border-transparent hover:border-gray-300 transition cursor-pointer">
-                                <input type="checkbox" value="visagie" x-model="extras" class="w-4 h-4 accent-text mr-3">
-                                <div class="text-sm">
-                                    <span class="block font-bold">Visagie & Haar</span>
-                                    <span class="text-xs text-muted">Externe Partner</span>
+                        <p class="text-xs uppercase tracking-widest font-bold mb-4 text-muted">2. Extra's</p>
+                        <div class="space-y-3">
+                            <!-- Visagie (Always available) -->
+                            <label class="flex justify-between items-center p-4 border border-gray-100 hover:border-gray-300 cursor-pointer">
+                                <div class="flex items-center">
+                                    <input type="checkbox" value="visagie" x-model="extras" class="w-4 h-4 accent-text mr-3">
+                                    <span class="font-bold text-sm">Visagie & Haar</span>
                                 </div>
+                                <span class="text-xs text-muted">Prijs op aanvraag</span>
                             </label>
-                             <label class="flex items-center p-4 bg-white border border-transparent hover:border-gray-300 transition cursor-pointer">
-                                <input type="checkbox" value="studio" x-model="extras" class="w-4 h-4 accent-text mr-3">
-                                <div class="text-sm">
-                                    <span class="block font-bold">Studio Huur</span>
-                                    <span class="text-xs text-muted">Indien op locatie</span>
+
+                            <!-- Studio (Conditional: Disabled for Oorsprong) -->
+                            <label class="flex justify-between items-center p-4 border border-gray-100 cursor-pointer"
+                                   :class="pkg === 'oorsprong' ? 'opacity-50 cursor-not-allowed bg-gray-50' : 'hover:border-gray-300'">
+                                <div class="flex items-center">
+                                    <input type="checkbox" value="studio" x-model="extras" class="w-4 h-4 accent-text mr-3"
+                                           :disabled="pkg === 'oorsprong'">
+                                    <div>
+                                        <span class="font-bold text-sm block">Studio Huur</span>
+                                        <span class="text-xs text-red-500" x-show="pkg === 'oorsprong'">Niet beschikbaar bij Oorsprong</span>
+                                    </div>
                                 </div>
+                                <span class="text-xs text-muted">€60 p/u</span>
                             </label>
                         </div>
                     </div>
                 </div>
 
-                <!-- OVERZICHT CARD -->
-                <div class="bg-white p-10 shadow-2xl flex flex-col justify-between h-full border-t-8 border-text">
+                <!-- Overzicht -->
+                <div class="bg-bg p-10 border border-lines flex flex-col justify-between h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                    </div>
+
                     <div>
-                        <span class="text-xs uppercase tracking-widest text-muted">Jouw Selectie</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4" x-text="prices[pkg].name"></h3>
-                        <p class="text-muted text-lg border-b border-lines pb-6 mb-6" x-text="prices[pkg].desc"></p>
+                        <span class="text-xs uppercase tracking-widest text-muted">Jouw Samenstelling</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-2" x-text="prices[pkg].name"></h3>
+                        <p class="text-sm text-muted border-b border-lines pb-6 mb-6" x-text="prices[pkg].desc"></p>
                         
-                        <div class="space-y-2 mb-8">
-                            <p class="flex justify-between text-sm" x-show="extras.length === 0">
-                                <span class="text-muted italic">Geen extra's geselecteerd</span>
-                            </p>
+                        <div class="space-y-2 text-sm">
                             <template x-for="extra in extras">
-                                <p class="flex justify-between text-sm font-medium">
+                                <div class="flex justify-between">
                                     <span x-text="'+ ' + addons[extra].name"></span>
-                                    <span x-text="addons[extra].display"></span>
-                                </p>
+                                    <span class="font-bold" x-text="addons[extra].text"></span>
+                                </div>
                             </template>
                         </div>
                     </div>
 
-                    <div>
-                        <div class="mb-2">
-                            <span class="text-xs uppercase font-bold text-muted">Geschatte Richtprijs</span>
-                            <!-- We tonen een 'gemiddelde' of 'vanaf' berekening in de totaal, maar refereren naar de range -->
-                            <div class="text-5xl font-sans font-bold" x-text="'€' + estimate()"></div>
-                            <p class="text-xs text-muted mt-2">*Definitieve prijs afhankelijk van locatie & specifieke wensen.</p>
+                    <div class="mt-8">
+                        <div class="flex justify-between items-end border-t border-lines pt-4">
+                            <span class="text-xs font-bold uppercase text-muted">Richtprijs (excl. BTW)</span>
+                            <div class="text-4xl font-sans font-bold" x-text="'€' + total()"></div>
                         </div>
-                        <a href="#contact" class="block text-center w-full bg-text text-white py-4 font-bold uppercase tracking-widest hover:bg-muted transition mt-6">
+                         <!-- Visagie note appears if selected -->
+                         <p class="text-xs text-muted text-right mt-1" x-show="extras.includes('visagie')">
+                            + Kosten Visagie (op offertebasis)
+                        </p>
+                        
+                        <a href="#contact" class="block text-center w-full bg-text text-white py-4 mt-6 font-bold uppercase tracking-widest hover:bg-muted transition">
                             Start Aanvraag
                         </a>
                     </div>
@@ -347,27 +428,19 @@
         </div>
     </section>
 
-    <!-- CONTACT FORMULIER -->
+    <!-- CONTACT (NO INSTA) -->
     <section id="contact" class="py-24 px-6 md:px-12 max-w-screen-xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
             <div>
-                <h2 class="font-sans text-4xl font-bold mb-6">Fotografie begint met vertrouwen.</h2>
-                <p class="text-xl text-muted font-light leading-relaxed mb-8">
-                    Laten we samen bespreken wat jij wil vangen.
+                <p class="text-xs font-bold uppercase tracking-[0.2em] mb-4 text-muted">Beschikbaar: Benelux & Internationaal</p>
+                <h2 class="font-sans text-4xl font-bold mb-6">Laten we samenwerken.</h2>
+                <p class="text-lg text-muted font-light leading-relaxed mb-8">
+                    Heb je vragen over de pakketten of een specifiek concept in gedachten? Appen is het snelst, mailen het volledigst.
                 </p>
-                <div class="flex flex-col gap-4 text-sm font-bold uppercase tracking-widest">
-                    <a href="#" class="flex items-center gap-4 p-4 border border-lines hover:bg-white transition">
-                        <span>WhatsApp (Snelst)</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-4 p-4 border border-lines hover:bg-white transition">
-                        <span>Instagram DM</span>
-                    </a>
-                </div>
             </div>
 
-            <form action="https://formspree.io/f/YOUR_ID" method="POST" class="space-y-6 bg-white p-8 md:p-12 shadow-sm border border-lines">
-                <input type="hidden" name="Onderwerp" value="StudioVINCE Aanvraag">
-                
+            <!-- FORM -->
+            <form action="https://formspree.io/f/YOUR_ID" method="POST" class="space-y-6 bg-white p-8 border border-lines">
                 <div>
                     <label class="block text-xs font-bold uppercase mb-2">Naam</label>
                     <input type="text" name="Naam" required class="w-full bg-bg border-none p-4 focus:ring-1 focus:ring-text">
@@ -377,10 +450,9 @@
                     <input type="email" name="Email" required class="w-full bg-bg border-none p-4 focus:ring-1 focus:ring-text">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase mb-2">Wat wil je vangen?</label>
-                    <textarea name="Bericht" rows="4" placeholder="Vertel kort over je wens..." class="w-full bg-bg border-none p-4 focus:ring-1 focus:ring-text"></textarea>
+                    <label class="block text-xs font-bold uppercase mb-2">Bericht</label>
+                    <textarea name="Bericht" rows="4" class="w-full bg-bg border-none p-4 focus:ring-1 focus:ring-text"></textarea>
                 </div>
-                
                 <button type="submit" class="w-full bg-text text-white py-4 font-bold uppercase tracking-widest hover:bg-muted transition">
                     Verstuur
                 </button>
@@ -390,15 +462,15 @@
 
     <!-- FOOTER -->
     <footer class="bg-white border-t border-lines py-12 text-center text-sm px-6">
-        <div class="mb-8">
+        <div class="mb-4">
             <span class="font-sans font-bold text-xl tracking-tight">Studio<span class="font-light">VINCE</span></span>
         </div>
-        <p class="text-muted mb-4">
-            © 2025 StudioVINCE - Alle beelden vieren de onbewaakte blik.
+        <p class="text-muted mb-4 text-xs tracking-wide">
+            Basis in Zuid-Nederland & Vlaanderen — Wereldwijd inzetbaar.
         </p>
-        <a href="#" class="text-xs text-gray-400 hover:text-text border-b border-transparent hover:border-gray-400 transition">
-            Zakelijke Opdrachten (Tarieven op Aanvraag)
-        </a>
+        <p class="text-muted mb-6 text-xs">
+            © 2025 StudioVINCE.
+        </p>
     </footer>
 
     <!-- WHATSAPP FLOATING BTN -->
