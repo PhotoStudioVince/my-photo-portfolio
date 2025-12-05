@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectie | StudioVINCE</title>
+    
+    <!-- TAILWIND (Styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- ALPINE JS (Logica) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Anti-Copy */
+        body { user-select: none; -webkit-user-select: none; }
+        img { pointer-events: none; } 
+
+        /* WATERMERK STIJL */
+        .watermark-container { position: relative; overflow: hidden; }
+        .watermark-container::after {
+            content: " PROOF • VINCE • PROOF • VINCE • PROOF ";
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0.35; color: rgba(255, 255, 255, 0.8);
+            font-size: 24px; font-weight: 900; text-transform: uppercase;
+            background-image: linear-gradient(45deg, transparent 20%, #000 20%, #000 22%, transparent 22%, transparent 100%);
+            background-size: 10px 10px;
+            pointer-events: none; z-index: 10;
+        }
+        .watermark-label {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 3vw; color: rgba(255,255,255,0.6);
+            font-weight: bold; z-index: 11;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: none;
+            white-space: nowrap;
+        }
+    </style>
+
+    <!-- HET BREIN (MOET IN DE HEAD STAAN) -->
+    <script>
+        function galleryApp() {
+            return {
+                locked: true,
+                pin: '',
+                error: false,
+                expanded: false,
+                screenshotWarning: false,
+
+                // --- INSTELLINGEN ---
+                correctPin: '4661', 
+
+                // --- FOTO LIJST ---
+                images: [
+                    { id: 1, url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500', filename: 'IMG_2401', rating: null },
+                    { id: 2, url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500', filename: 'IMG_2402', rating: null },
+                    { id: 3, url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500', filename: 'IMG_2403', rating: null },
+                    { id: 4, url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500', filename: 'IMG_2404', rating: null },
+                    { id: 5, url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500', filename: 'IMG_2405', rating: null },
+                    { id: 6, url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500', filename: 'IMG_2406', rating: null },
+                    { id: 7, url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500', filename: 'IMG_2407', rating: null },
+                    { id: 8, url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500', filename: 'IMG_2408', rating: null },
+                    { id: 9, url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500', filename: 'IMG_2409', rating: null },
+                    { id: 10, url: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=500', filename: 'IMG_2410', rating: null },
+                    { id: 11, url: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=500', filename: 'IMG_2411', rating: null },
+                    { id: 12, url: 'https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=500', filename: 'IMG_2412', rating: null },
+                    { id: 13, url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500', filename: 'IMG_2413', rating: null },
+                    { id: 14, url: 'https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=500', filename: 'IMG_2414', rating: null },
+                    { id: 15, url: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500', filename: 'IMG_2415', rating: null }
+                ],
+
+                checkPin() {
+                    if (this.pin === this.correctPin) this.locked = false;
+                    else { this.error = true; setTimeout(() => this.error = false, 1000); }
+                },
+
+                rate(id, type) {
+                    const img = this.images.find(i => i.id === id);
+                    if (img.rating === type) img.rating = null;
+                    else img.rating = type;
+                },
+
+                count(type) { return this.images.filter(i => i.rating === type).length; },
+                totalSelected() { return this.images.filter(i => i.rating === 'love' || i.rating === 'like').length; },
+
+                detectScreenshot(e) {
+                    if (e.key === 'PrintScreen') {
+                        this.screenshotWarning = true;
+                        navigator.clipboard.writeText('Screenshots niet toegestaan.');
+                        setTimeout(() => this.screenshotWarning = false, 2000);
+                    }
+                },
+
+                get whatsappLink() {
+                    let loves = this.images.filter(i => i.rating === 'love').map(i => i.filename);
+                    let likes = this.images.filter(i => i.rating === 'like').map(i => i.filename);
+                    
+                    let msg = `Hoi Vince, hier is mijn selectie voor nabewerking:%0A%0A`;
+                    
+                    if (loves.length > 0) msg += `❤️ *SUPER (Graag 100%):*%0A` + loves.join(', ') + `%0A%0A`;
+                    if (likes.length > 0) msg += `⭐ *INTERESSANT (Twijfel/Optie):*%0A` + likes.join(', ') + `%0A`;
+                    
+                    return `https://wa.me/31630233865?text=${msg}`;
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans h-screen flex flex-col overflow-hidden"
+      x-data="galleryApp()"
+      @keyup.window="detectScreenshot($event)">
+
+    <!-- FLASH SCREEN (PC Only Screenshot detect) -->
+    <div x-show="screenshotWarning" 
+         class="fixed inset-0 bg-white z-[100] flex items-center justify-center flex-col text-center p-8"
+         x-transition.opacity duration-200
+         style="display: none;">
+        <div class="text-6xl mb-4">🚫</div>
+        <h2 class="text-2xl font-bold uppercase tracking-widest text-red-600">Geen Screenshots</h2>
+        <p class="text-gray-500 mt-2">Gebruik de selectieknoppen.</p>
+    </div>
+
+    <!-- 1. LOGIN -->
+    <div x-show="locked" class="fixed inset-0 z-50 bg-[#1a1a1a] flex flex-col items-center justify-center p-4">
+        <h1 class="text-white text-xl uppercase tracking-[0.3em] mb-8 font-light">Studio<span class="font-bold">VINCE</span></h1>
+        <div class="relative">
+            <input type="password" x-model="pin" maxlength="4" placeholder="CODE" inputmode="numeric"
+                   class="bg-transparent border-b border-gray-600 text-center text-white text-4xl tracking-[0.5em] w-48 pb-2 focus:outline-none focus:border-white transition mb-6 placeholder-gray-700"
+                   @keyup.enter="checkPin()">
+        </div>
+        <button @click="checkPin()" class="bg-white text-black px-10 py-4 uppercase text-xs font-bold tracking-widest hover:bg-gray-200 rounded-sm">
+            Toon Galerij
+        </button>
+        <p x-show="error" class="text-red-500 text-xs mt-4 animate-pulse uppercase tracking-widest" style="display:none">Code Incorrect</p>
+    </div>
+
+    <!-- 2. GALLERY INTERFACE -->
+    <div x-show="!locked" class="flex flex-col h-full" style="display: none;">
+        
+        <!-- HEADER -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-8 shrink-0 z-20 shadow-sm">
+            <span class="font-bold tracking-tight uppercase text-sm md:text-base">Studio<span class="font-light">VINCE</span></span>
+            <div class="flex gap-4">
+                 <button @click="locked = true; pin=''" class="text-[10px] md:text-xs font-bold hover:text-red-500 uppercase border border-gray-300 px-3 py-1 rounded">Log Uit</button>
+            </div>
+        </header>
+
+        <!-- MAIN -->
+        <div class="flex-1 flex overflow-hidden relative">
+            
+            <!-- FOTO GRID (Scrollbaar) -->
+            <main class="flex-1 overflow-y-auto bg-[#f4f4f0] p-4 pb-40 md:pb-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        
+                        <template x-for="img in images" :key="img.id">
+                            <!-- CARD -->
+                            <div class="bg-white p-2 shadow-sm rounded-sm transition hover:shadow-md">
+                                
+                                <div class="watermark-container aspect-[3/4] bg-gray-200 overflow-hidden relative cursor-pointer">
+                                    <div class="watermark-label">PROOF ONLY</div>
+                                    <img :src="img.url" class="w-full h-full object-cover" 
+                                         :class="img.rating === 'meh' ? 'opacity-25 grayscale' : ''">
+
+                                    <div class="absolute top-2 right-2 z-20 drop-shadow-md">
+                                        <div x-show="img.rating === 'love'" class="bg-red-500 text-white p-1.5 rounded-full"><i class="ph-bold ph-heart text-xl"></i></div>
+                                        <div x-show="img.rating === 'like'" class="bg-yellow-400 text-white p-1.5 rounded-full"><i class="ph-bold ph-star text-xl"></i></div>
+                                        <div x-show="img.rating === 'meh'"  class="bg-gray-500 text-white p-1.5 rounded-full"><i class="ph-bold ph-x text-xl"></i></div>
+                                    </div>
+                                </div>
+
+                                <!-- Knoppen -->
+                                <div class="flex justify-between items-center mt-3 px-1">
+                                    <span class="text-xs font-mono text-gray-400 uppercase" x-text="img.filename"></span>
+                                    <div class="flex gap-2">
+                                        <button @click="rate(img.id, 'meh')" 
+                                                class="w-10 h-10 rounded-full flex items-center justify-center border transition active:scale-95"
+                                                :class="img.rating === 'meh' ? 'bg-gray-800 border-gray-800 text-white' : 'border-gray-200 text-gray-400'">
+                                            <i class="ph-bold ph-x text-lg"></i>
+                                        </button>
+                                        <button @click="rate(img.id, 'like')"
+                                                class="w-10 h-10 rounded-full flex items-center justify-center border transition active:scale-95"
+                                                :class="img.rating === 'like' ? 'bg-yellow-400 border-yellow-400 text-white' : 'border-gray-200 text-gray-400'">
+                                            <i class="ph-bold ph-star text-lg"></i>
+                                        </button>
+                                        <button @click="rate(img.id, 'love')"
+                                                class="w-10 h-10 rounded-full flex items-center justify-center border transition active:scale-95"
+                                                :class="img.rating === 'love' ? 'bg-red-500 border-red-500 text-white' : 'border-gray-200 text-gray-400'">
+                                            <i class="ph-fill ph-heart text-lg"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                    </div>
+                    <div class="text-center mt-12 mb-20 text-gray-400 text-sm"><p>— Einde selectie —</p></div>
+                </div>
+            </main>
+
+            <!-- SIDEBAR (DESKTOP) -->
+            <aside class="w-80 bg-white border-l border-gray-200 hidden lg:flex flex-col shrink-0 z-30">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <h3 class="font-bold uppercase tracking-widest text-xs">Jouw Overzicht</h3>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                    <template x-if="totalSelected() === 0">
+                        <div class="text-center text-gray-400 italic text-sm mt-10">Selecteer foto's om ze hier te zien.</div>
+                    </template>
+                    
+                    <div x-show="count('love') > 0">
+                        <h4 class="text-xs font-bold text-red-500 uppercase mb-2 flex items-center gap-2"><i class="ph-fill ph-heart"></i> Super</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="img in images.filter(i => i.rating === 'love')">
+                                <span class="text-[10px] bg-red-50 text-red-600 border border-red-100 px-2 py-1 rounded" x-text="img.filename"></span>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="count('like') > 0">
+                        <h4 class="text-xs font-bold text-yellow-500 uppercase mb-2 flex items-center gap-2"><i class="ph-fill ph-star"></i> Interessant</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="img in images.filter(i => i.rating === 'like')">
+                                <span class="text-[10px] bg-yellow-50 text-yellow-600 border border-yellow-100 px-2 py-1 rounded" x-text="img.filename"></span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 border-t border-gray-200 bg-gray-50">
+                    <a :href="whatsappLink" target="_blank" class="block w-full bg-[#25D366] hover:bg-[#1ebc50] text-white py-4 rounded text-center font-bold uppercase tracking-widest text-xs shadow-lg transition" :class="totalSelected() === 0 ? 'opacity-50 pointer-events-none' : ''">
+                        Verstuur Selectie
+                    </a>
+                </div>
+            </aside>
+        </div>
+
+
+        <!-- MOBILE BAR -->
+        <div class="fixed bottom-0 left-0 w-full lg:hidden z-40 transition-all duration-300 shadow-[0_-5px_20px_rgba(0,0,0,0.15)] bg-white"
+             :class="expanded ? 'h-[70vh] rounded-t-2xl' : 'h-20'">
+            
+            <div class="h-20 px-6 flex items-center justify-between border-b border-gray-100 cursor-pointer bg-white relative z-50"
+                 :class="expanded ? 'rounded-t-2xl' : ''"
+                 @click="expanded = !expanded">
+                
+                <div class="flex flex-col">
+                    <span class="text-[10px] uppercase tracking-widest text-gray-400">Geselecteerd</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl font-bold text-gray-800" x-text="totalSelected()"></span>
+                        <i class="ph-bold ph-caret-up text-gray-400 transition transform duration-300" :class="expanded ? 'rotate-180' : ''"></i>
+                    </div>
+                </div>
+
+                <a :href="whatsappLink" target="_blank"
+                   @click.stop 
+                   class="bg-[#25D366] text-white px-5 py-3 rounded-full shadow font-bold uppercase text-xs tracking-widest flex items-center gap-2"
+                   :class="totalSelected() === 0 ? 'opacity-50 pointer-events-none' : ''">
+                   <i class="ph-fill ph-whatsapp-logo text-lg"></i> <span x-text="expanded ? 'Verstuur via App' : 'Verstuur'"></span>
+                </a>
+            </div>
+
+            <!-- Mobile List -->
+            <div class="h-full overflow-y-auto bg-gray-50 p-6 pb-24" x-show="expanded" x-transition>
+                <h3 class="font-bold text-lg mb-6">Jouw Overzicht</h3>
+                
+                <template x-if="totalSelected() === 0">
+                    <p class="text-gray-400 italic text-sm">Nog geen selectie gemaakt.</p>
+                </template>
+
+                <div x-show="count('love') > 0" class="mb-6">
+                    <h4 class="text-sm font-bold text-red-500 uppercase mb-3 flex items-center gap-2"><i class="ph-fill ph-heart"></i> Super</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                         <template x-for="img in images.filter(i => i.rating === 'love')">
+                            <div class="bg-white p-2 rounded border border-red-100 flex items-center gap-2">
+                                <img :src="img.url" class="w-8 h-8 object-cover rounded-sm grayscale">
+                                <span class="text-xs font-mono font-bold text-gray-700" x-text="img.filename"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div x-show="count('like') > 0" class="mb-6">
+                    <h4 class="text-sm font-bold text-yellow-500 uppercase mb-3 flex items-center gap-2"><i class="ph-fill ph-star"></i> Interessant</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                         <template x-for="img in images.filter(i => i.rating === 'like')">
+                            <div class="bg-white p-2 rounded border border-yellow-100 flex items-center gap-2">
+                                <img :src="img.url" class="w-8 h-8 object-cover rounded-sm grayscale">
+                                <span class="text-xs font-mono font-bold text-gray-700" x-text="img.filename"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                 <div x-show="count('meh') > 0" class="mb-6 opacity-50">
+                    <h4 class="text-xs font-bold text-gray-400 uppercase mb-3 flex items-center gap-2"><i class="ph-fill ph-x"></i> Niet geselecteerd</h4>
+                    <div class="flex flex-wrap gap-2">
+                         <template x-for="img in images.filter(i => i.rating === 'meh')">
+                            <span class="text-[10px] bg-gray-200 text-gray-500 px-2 py-1 rounded" x-text="img.filename"></span>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
