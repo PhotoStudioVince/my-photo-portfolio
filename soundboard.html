@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Soundboard</title>
+    
+    <!-- TAILWIND & ALPINE -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        /* Verberg scrollbar maar blijf scrollbaar */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#111] text-white font-mono h-screen flex flex-col overflow-hidden select-none"
+      x-data="{
+          locked: true,
+          pin: '',
+          error: false,
+          
+          // --- CONFIGURATIE ---
+          correctPin: '1990', // <-- JOUW PINCODE
+
+          // HIERONDER ALLEEN BESTANDSNAAM & KLEUR INVULLEN
+          // De tekst op de knop wordt automatisch de bestandsnaam.
+          sounds: [
+              { file: 'sounds/airhorn.mp3',   color: 'bg-red-500' },
+              { file: 'sounds/trommel.mp3',   color: 'bg-blue-500' },
+              { file: 'sounds/krekel.mp3',    color: 'bg-green-500' },
+              { file: 'sounds/applaus.wav',   color: 'bg-yellow-500' },
+              { file: 'sounds/nope.mp3',      color: 'bg-purple-500' },
+              { file: 'sounds/lachen.mp3',    color: 'bg-orange-500' },
+              { file: 'sounds/fout.mp3',      color: 'bg-pink-500' },
+              { file: 'sounds/drama.mp3',     color: 'bg-red-600' },
+              { file: 'sounds/ba-dum-tss.mp3',color: 'bg-indigo-500' },
+              { file: 'sounds/wow.mp3',       color: 'bg-teal-500' },
+              { file: 'sounds/fluitje.mp3',   color: 'bg-cyan-500' },
+              { file: 'sounds/koekoek.mp3',   color: 'bg-lime-500' },
+          ],
+          
+          // SLIMME LOGICA (Raak dit niet aan)
+          getLabel(path) {
+              // Verwijdert 'sounds/' en '.mp3' en maakt van streepjes spaties
+              let name = path.split('/').pop().split('.')[0]; 
+              return name.replace(/[-_]/g, ' ');
+          },
+
+          checkPin() {
+              if (this.pin === this.correctPin) this.locked = false;
+              else {
+                  this.error = true;
+                  this.pin = '';
+                  setTimeout(() => this.error = false, 500);
+              }
+          },
+
+          play(soundFile) {
+              new Audio(soundFile).play();
+          }
+      }">
+
+    <!-- SCENE 1: HET SLOT (Centraal) -->
+    <div x-show="locked" class="flex-1 flex flex-col items-center justify-center p-6">
+        <h1 class="text-xl mb-8 uppercase tracking-widest text-gray-400">Restricted Area</h1>
+        
+        <div class="relative w-full max-w-[200px]">
+            <input type="password" x-model="pin" maxlength="4" placeholder="PIN" inputmode="numeric"
+                   class="bg-transparent border-b-2 border-gray-600 text-center text-4xl tracking-[0.5em] pb-2 w-full focus:border-white focus:outline-none transition placeholder-gray-800"
+                   :class="{'border-red-500 text-red-500': error}"
+                   @keyup.enter="checkPin()">
+        </div>
+        
+        <button @click="checkPin()" class="mt-8 text-sm uppercase tracking-widest border border-gray-600 px-6 py-3 rounded-full hover:bg-white hover:text-black transition">
+            Unlock
+        </button>
+    </div>
+
+    <!-- SCENE 2: HET SOUNDBOARD (Scrollbaar) -->
+    <div x-show="!locked" class="flex flex-col h-full" style="display: none;">
+        
+        <!-- HEADER (Vast bovenin) -->
+        <div class="p-6 flex justify-between items-center bg-[#111] z-10 shadow-md">
+            <h2 class="text-lg font-bold uppercase tracking-widest">Soundboard</h2>
+            <button @click="locked = true; pin = ''" class="text-[10px] font-bold uppercase text-red-500 border border-red-900 px-3 py-1 rounded-full">Lock</button>
+        </div>
+
+        <!-- DE GRID (Scrollbaar) -->
+        <div class="flex-1 overflow-y-auto hide-scroll p-4 pb-12">
+            <!-- 3 Kolommen Grid -->
+            <div class="grid grid-cols-3 gap-4 auto-rows-min">
+                
+                <template x-for="sound in sounds">
+                    <!-- De Ronde Knop -->
+                    <button @click="play(sound.file)" 
+                            class="aspect-square rounded-full shadow-lg transform transition active:scale-90 flex items-center justify-center relative overflow-hidden group"
+                            :class="sound.color">
+                        
+                        <!-- Glans Effect -->
+                        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition"></div>
+                        
+                        <!-- Tekst (Automatisch gegenereerd uit bestandsnaam) -->
+                        <span class="text-[10px] md:text-sm font-bold uppercase tracking-wide text-center px-1 break-words leading-tight drop-shadow-md" 
+                              x-text="getLabel(sound.file)">
+                        </span>
+                    </button>
+                </template>
+
+            </div>
+            
+            <!-- Ruimte onderin voor scrollen op mobiel -->
+            <div class="h-12"></div>
+        </div>
+    </div>
+
+</body>
+</html>
